@@ -38,7 +38,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        forwardInput = Input.GetAxis("Vertical");
+        if (drivable)
+        {
+            forwardInput = Input.GetAxis("Vertical");        
+        }
+
         slowDownRate = (float)(0.5 * (forwardAcceleration * forwardAcceleration));
         RPMFactor = maxRPM- minRPM;
 
@@ -86,8 +90,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
             maxAcceleration = 1;
         }
 
-        
-
         toerenPerMinuut = forwardAcceleration * inputToRpm + minRPM;       
 
         return toerenPerMinuut;
@@ -95,10 +97,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     float SnelheidUpdate()
     {
-        if (drivable)
-        {
-            forwardAcceleration += forwardInput * Time.deltaTime;            
-        }
+
+        forwardAcceleration += forwardInput * Time.deltaTime;   
 
         if (forwardInput == 0)
         {
@@ -139,7 +139,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // optimaliseren: kan niet remmen in hogere versnelling want drivable wordt false
     bool Drivability()
     {
-        
+        drivable = false;
+
+        if (strengh > maxAcceleration)
+        {
+            drivable = true;
+        } else if (forwardAcceleration > maxAcceleration / 3)
+        {
+            drivable = true;
+        }
 
         return drivable;
     }
