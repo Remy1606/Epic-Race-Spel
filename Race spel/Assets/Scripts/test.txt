@@ -55,7 +55,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
         forwardAcceleration = SnelheidUpdate();
         turnSpeed = SturenSnelheidUpdate();
-        toerenPerMinuut = EngineRPM();
+        toerenPerMinuut = GearConfig();
         drivable = Drivability();
 
         SetText();
@@ -65,19 +65,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
     }
 
-    float EngineRPM()
+    float GearConfig()
     {
-        toerenPerMinuut += RPMFactor * forwardInput * Time.deltaTime;
-
-        if (toerenPerMinuut >= maxRPM)
+        if (toerenPerMinuut == maxRPM)
         {
-            toerenPerMinuut = toerenPerMinuut - 100;
+            toerenPerMinuut = maxRPM;
         }
 
-        if (toerenPerMinuut <= minRPM)
-        {
-            toerenPerMinuut = minRPM;
-        }
 
         if (currentGear != 0)
         { 
@@ -92,6 +86,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
             maxAcceleration = 1;
         }
 
+        
+
+        toerenPerMinuut = forwardAcceleration * inputToRpm + minRPM;       
+
         return toerenPerMinuut;
     }
 
@@ -99,7 +97,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (drivable)
         {
-            forwardAcceleration = (toerenPerMinuut - 900) / RPMFactor;            
+            forwardAcceleration += forwardInput * Time.deltaTime;            
         }
 
         if (forwardInput == 0)
@@ -124,7 +122,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         return forwardAcceleration;
     }
-
 
     float SturenSnelheidUpdate()
     {
