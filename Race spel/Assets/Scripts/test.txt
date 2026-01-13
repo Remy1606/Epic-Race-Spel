@@ -15,6 +15,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public TextMeshProUGUI toerenText;
     public TextMeshProUGUI GearText;
     public float toerenPerMinuut;
+    public float visualRPM;
     public int currentGear = 1;
     public int inputToRpm;
     public int maxRPM = 8000;
@@ -26,7 +27,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void SetText()
     {
-        toerenText.text = toerenPerMinuut.ToString("0");
+        toerenText.text = visualRPM.ToString("0");
         GearText.text = currentGear.ToString();
     }
 
@@ -55,9 +56,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
         forwardAcceleration = SnelheidUpdate();
         turnSpeed = SturenSnelheidUpdate();
-        toerenPerMinuut = GearConfig();
+        toerenPerMinuut = EngineRPM();
         drivable = Drivability();
-
+        visualRPM = VisualizeRPM();
         SetText();
         // foward based on user input
         transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardAcceleration);
@@ -65,13 +66,16 @@ public class NewMonoBehaviourScript : MonoBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
     }
 
-    float GearConfig()
+    float EngineRPM()
     {
-        if (toerenPerMinuut == maxRPM)
-        {
-            toerenPerMinuut = maxRPM;
-        }
+        
+        toerenPerMinuut += RPMFactor * forwardInput * Time.deltaTime;
 
+
+        if (forwardInput == 0)
+        {
+            toerenPerMinuut -= slowDownRate * Time.deltaTime * RPMFactor;
+        }
 
         if (currentGear != 0)
         { 
@@ -86,10 +90,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
             maxAcceleration = 1;
         }
 
-        
-
-        toerenPerMinuut = forwardAcceleration * inputToRpm + minRPM;       
-
         return toerenPerMinuut;
     }
 
@@ -97,12 +97,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (drivable)
         {
-            forwardAcceleration += forwardInput * Time.deltaTime;            
-        }
-
-        if (forwardInput == 0)
-        {
-            forwardAcceleration -= slowDownRate * Time.deltaTime;
+            forwardAcceleration = toerenPerMinuut / RPMFactor;            
         }
 
         if (forwardInput < 0 && forwardAcceleration <= 0)
@@ -123,6 +118,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         return forwardAcceleration;
     }
 
+
     float SturenSnelheidUpdate()
     {
         if (forwardAcceleration == 0)
@@ -142,6 +138,29 @@ public class NewMonoBehaviourScript : MonoBehaviour
         
 
         return drivable;
+    }
+
+    float VisualizeRPM()
+    {
+        
+        if (visualRPM < maxRPM)
+        {
+            visualRPM = toerenPerMinuut;
+
+        }
+        
+        if (visualRPM >= maxRPM)
+        {
+            visualRPM = visualRPM - 100;
+
+        }
+
+        if (visualRPM <= minRPM)
+        {
+            visualRPM = minRPM;
+        }
+
+        return visualRPM;
     }
 
 }
