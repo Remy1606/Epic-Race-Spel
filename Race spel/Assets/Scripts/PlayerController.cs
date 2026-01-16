@@ -14,6 +14,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float slowDownRate;
     public TextMeshProUGUI toerenText;
     public TextMeshProUGUI GearText;
+    public TextMeshProUGUI Warning;
     public float toerenPerMinuut;
     public int currentGear = 1;
     public int inputToRpm;
@@ -23,11 +24,13 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public float strengh;
     public bool drivable = true;
     public int maxGear = 5;
+    public string warningText;
 
     void SetText()
     {
         toerenText.text = toerenPerMinuut.ToString("0");
         GearText.text = currentGear.ToString();
+        Warning.text = warningText;
     }
 
     void Start()
@@ -41,6 +44,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (drivable)
         {
             forwardInput = Input.GetAxis("Vertical");        
+        } else
+        {
+            if (Input.GetAxis("Vertical") < 0)
+            {
+                forwardInput = Input.GetAxis("Vertical"); 
+            } else
+            {
+                drivable = false;
+            }
         }
 
         slowDownRate = (float)(0.5 * (forwardAcceleration * forwardAcceleration));
@@ -51,9 +63,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
             currentGear += 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Comma) && currentGear != 0)
+        if (Input.GetKeyDown(KeyCode.Comma) && currentGear != 1)
         {
             currentGear -= 1;
+        }
+
+        if (!drivable)
+        {
+            warningText = "Too slow, shift to a lower gear!";
+        } else
+        {
+            warningText = "";
         }
 
         
