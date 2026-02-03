@@ -151,7 +151,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
         else
         {
-            turnSpeed = (float)(-(10 * forwardAcceleration) + 80);
+            turnSpeed = 80- forwardAcceleration;
         }
         return turnSpeed;
     }
