@@ -32,7 +32,7 @@ public class TrackCheckpoints : MonoBehaviour
         if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
         {
             // goed
-            Debug.Log("goed");
+            Debug.Log("goed" + nextCheckpointSingleIndex);
             CheckpointSingle correctCheckpointSingle = checkpointSingleList[nextCheckpointSingleIndex];
             correctCheckpointSingle.Hide();
 
