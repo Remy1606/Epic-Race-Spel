@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;  
 
 public class TimeKeeper : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class TimeKeeper : MonoBehaviour
     public float lastLapTime = 0.0f;
     public float bestLapTime = 0.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
@@ -32,6 +32,26 @@ public class TimeKeeper : MonoBehaviour
         
 
         timerText.text = time;
+
+        if (Input.GetKeyDown("r"))
+        {
+            Restart();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
+        }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Racing");
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("Titel");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,4 +75,5 @@ public class TimeKeeper : MonoBehaviour
         }
 
     }
+
 }
