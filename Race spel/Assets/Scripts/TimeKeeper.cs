@@ -3,6 +3,7 @@ using TMPro;
 
 public class TimeKeeper : MonoBehaviour
 {
+    public TrackCheckpoints trackCheckpoints;
 
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI LastLapText;
@@ -35,19 +36,22 @@ public class TimeKeeper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        LastLapText.text = timerText.text;
-        lastLapTime = totalTime;
-        timer = 0.0f;
+        if (trackCheckpoints.nextCheckpointSingleIndex == 0){
+            LastLapText.text = timerText.text;
+            lastLapTime = totalTime;
+            timer = 0.0f;
 
-        if (bestLapTime == 0)
-        {
+            if (bestLapTime == 0)
+            {
+                BestLapText.text = LastLapText.text;
+                bestLapTime = lastLapTime;
+            } 
+            else if (lastLapTime < bestLapTime)
+            {
             BestLapText.text = LastLapText.text;
-            bestLapTime = lastLapTime;
-        } 
-        else if (lastLapTime < bestLapTime)
-        {
-            BestLapText.text = LastLapText.text;
-            bestLapTime = lastLapTime;
+                bestLapTime = lastLapTime;
+            }
+
         }
 
     }

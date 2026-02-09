@@ -1,17 +1,37 @@
 using UnityEngine;
 
-public class CheckpointManager : MonoBehaviour
+public class CheckpointSingle : MonoBehaviour
 {
-    public int checkpointIndex;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private TrackCheckpoints trackCheckpoints;
+    private MeshRenderer meshRenderer;
+
+    private void Awake()
     {
-        checkpointIndex = 0;
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Hide();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        trackCheckpoints.PlayerThroughCheckpoint(this);
+    }
+    
+    public void SetTrackCheckpoints(TrackCheckpoints trackCheckpoints)
+    {
+        this.trackCheckpoints = trackCheckpoints;
+    }
+
+    public void Show()
+    {
+        meshRenderer.enabled = true;
+    }
+
+    public void Hide()
+    {
+        meshRenderer.enabled = false;
     }
 }

@@ -3,32 +3,7 @@ guid: f731a1ad8f34c9d44a29f73f9d3ad38c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: band
-    second: {fileID: 2100000, guid: e0374c68631510a46bbd723b5423b384, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: car _window
-    second: {fileID: 2100000, guid: 5e641fd566621524783d9da2b2660776, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: car_body
-    second: {fileID: 2100000, guid: 6acc060bf315763449699eed76576be4, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: licht
-    second: {fileID: 2100000, guid: 144d7045b5c0d8a4fb3c5e825a8e0729, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: velg
-    second: {fileID: 2100000, guid: ca164546b27f5134ba17bc066ef9b4bb, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
