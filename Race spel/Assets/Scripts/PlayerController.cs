@@ -5,7 +5,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
 
 {
-    public float speed = 20f;
+    public float speed = 25f;
     public float turnSpeed;
     public float forwardAcceleration = 0.0f;
     public float maxAcceleration;
@@ -16,15 +16,17 @@ public class NewMonoBehaviourScript : MonoBehaviour
     public TextMeshProUGUI GearText;
     public TextMeshProUGUI Warning;
     public float toerenPerMinuut;
-    public int currentGear = 1;
-    public int inputToRpm;
+    public float currentGear = 1;
+    public float inputToRpm;
     public int maxRPM = 8000;
     public int minRPM = 900;
-    public int RPMFactor;
+    public float RPMFactor;
     public float strengh;
     public bool drivable = true;
-    public int maxGear = 5;
+    public float maxGear = 5;
     public string warningText;
+
+    public float gearing;
 
     void SetText()
     {
@@ -82,6 +84,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         toerenPerMinuut = GearConfig();
         drivable = Drivability();
 
+        gearing = strengh / 2.0f;
+
         SetText();
         // foward based on user input
         transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardAcceleration);
@@ -99,8 +103,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         if (currentGear != 0)
         { 
-            strengh = (float)(maxGear / currentGear);
-            inputToRpm = RPMFactor / currentGear;
+            strengh = maxGear / currentGear;
+            inputToRpm = (float)RPMFactor / currentGear;
             maxAcceleration = currentGear;
         }
         else
@@ -118,9 +122,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
     float SnelheidUpdate()
     {
 
-        forwardAcceleration += forwardInput * Time.deltaTime;   
+        forwardAcceleration += forwardInput * Time.deltaTime * gearing;   
 
-        if (forwardInput == 0)
+        if (forwardInput <= 0)
         {
             forwardAcceleration -= slowDownRate * Time.deltaTime;
         }
