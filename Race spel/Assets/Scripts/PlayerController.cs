@@ -1,9 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class NewMonoBehaviourScript : MonoBehaviour
-
-
+public class PlayerController : MonoBehaviour
 {
     public float speed = 25f;
     public float turnSpeed;
@@ -155,7 +153,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
         else
         {
-            turnSpeed = 75 - (float)(forwardAcceleration * 10);
+            turnSpeed = 75 - (float)(forwardAcceleration * 12.5f);
         }
         return turnSpeed;
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;  
+
 
 public class TimeKeeper : MonoBehaviour
 {
@@ -32,27 +32,8 @@ public class TimeKeeper : MonoBehaviour
         
 
         timerText.text = time;
-
-        if (Input.GetKeyDown("r"))
-        {
-            Restart();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ExitGame();
-        }
     }
 
-    public void Restart()
-    {
-        SceneManager.LoadScene("Racing");
-    }
-
-    public void ExitGame()
-    {
-        SceneManager.LoadScene("Titel");
-    }
 
     private void OnTriggerEnter(Collider other)
     {
