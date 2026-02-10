@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -984,6 +985,15 @@ MonoBehaviour:
   getLocation: {fileID: 1005172395}
   orbitRadius: 10
   lowerLimit: 4
+--- !u!45 &330585549
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 3e5399bd195de7649b874f58c1b9f8a3, type: 2}
 --- !u!4 &345355013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7475388055504181178, guid: 2fc1cf3230af42648a23966d1180ff01, type: 3}
@@ -4916,7 +4926,7 @@ RectTransform:
   m_GameObject: {fileID: 2130300648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.84999, z: 1}
+  m_LocalScale: {x: 1, y: 0.9519888, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1774754341}
@@ -5011,7 +5021,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 31.001099, y: 20.667206, z: 0, w: -10.333595}
+  m_margin: {x: 31.001099, y: 23.040531, z: 0, w: -15.871376}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
