@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
         return turnSpeed;
     }
 
-    // optimaliseren: kan niet remmen in hogere versnelling want drivable wordt false
+
     bool Drivability()
     {
         drivable = false;
